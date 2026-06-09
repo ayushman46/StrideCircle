@@ -193,7 +193,7 @@ const handleCompare = async (req, res, session, supabase) => {
     const aiOutput = payload.choices?.[0]?.message?.content?.trim() || 'Great effort on these runs!'
 
     res.status(200).json({ comparison: aiOutput })
-  } catch (err) {
+  } catch {
     res.status(500).json({ error: 'Failed to generate comparison score' })
   }
 }

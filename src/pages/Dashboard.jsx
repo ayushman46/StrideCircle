@@ -100,32 +100,33 @@ const Dashboard = () => {
         <div className="section-header">
           <div>
             <h2>Dashboard</h2>
-            <p className="muted">Pick a week, then drill into your runs.</p>
+            <p className="muted">Choose an active day and the dashboard follows that week.</p>
           </div>
           <div className="header-actions">
             <SyncButton onSync={() => syncMutation.mutate()} isLoading={syncMutation.isLoading} />
           </div>
         </div>
 
-        <div style={{ marginBottom: '24px' }}>
-          <div className="card glass">
-            <div style={{ marginBottom: '20px', textAlign: 'center' }}>
-              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 900, letterSpacing: '-0.02em' }}>Activity Calendar</h3>
-              <p className="muted" style={{ margin: '4px 0 0', fontSize: '0.85rem' }}>Select a day to lock the dashboard to that week.</p>
+        <div className="card">
+          <div className="section-head">
+            <div>
+              <h3>Activity calendar</h3>
+              <p className="muted">Days with runs appear in the calendar. Tap one to view that week.</p>
             </div>
-            <MonthCalendar
-              activities={activitiesQuery.data?.activities ?? []}
-              onSelectDate={(date) => {
-                const day = date.getDay()
-                const diff = day === 0 ? 0 : 7 - day
-                const endOfWeek = new Date(date)
-                endOfWeek.setDate(endOfWeek.getDate() + diff)
-                endOfWeek.setHours(23, 59, 59, 999)
-                setSelectedWeekEnd(endOfWeek.toISOString())
-                setCompareIds([])
-              }}
-            />
           </div>
+          <MonthCalendar
+            activities={activitiesQuery.data?.activities ?? []}
+            selectedEndIso={selectedWeekEnd}
+            onSelectDate={(date) => {
+              const day = date.getDay()
+              const diff = day === 0 ? 0 : 7 - day
+              const endOfWeek = new Date(date)
+              endOfWeek.setDate(endOfWeek.getDate() + diff)
+              endOfWeek.setHours(23, 59, 59, 999)
+              setSelectedWeekEnd(endOfWeek.toISOString())
+              setCompareIds([])
+            }}
+          />
         </div>
 
         <div className="grid stats-grid">
@@ -133,7 +134,11 @@ const Dashboard = () => {
             label="Distance"
             value={`${current?.totalDistanceKm ?? 0} km`}
             helper="Last 7 days"
-            trend={distanceDelta === null ? null : `vs prev: ${distanceDelta >= 0 ? '+' : ''}${distanceDelta.toFixed(1)} km`}
+            trend={
+              distanceDelta === null
+                ? null
+                : `Compared with previous week, ${Math.abs(distanceDelta).toFixed(1)} km ${distanceDelta >= 0 ? 'more' : 'less'}`
+            }
             trendTone={trendTone(distanceDelta)}
           />
           <StatCard
@@ -145,7 +150,7 @@ const Dashboard = () => {
           />
           <StatCard
             label="Time"
-            value={secondsToHms(current?.totalElapsedTimeSec) ?? '—'}
+            value={secondsToHms(current?.totalElapsedTimeSec) ?? 'Not available'}
             helper="Elapsed time"
           />
           <StatCard label="Runs" value={current?.totalRuns ?? 0} helper="Last 7 days" />
@@ -157,7 +162,7 @@ const Dashboard = () => {
           <StatCard
             label="Achievements"
             value={current?.totalAchievements ?? 0}
-            helper="Trophies + PRs"
+            helper="Trophies and personal bests"
           />
           <StatCard label="Kudos" value={current?.totalKudos ?? 0} helper="From friends" />
           <StatCard label="Points" value={Math.round(current?.totalPoints ?? 0)} helper="Last 7 days" />

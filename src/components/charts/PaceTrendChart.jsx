@@ -15,27 +15,27 @@ const PaceTrendChart = ({ data, variant = 'card' }) => {
         <LineChart data={data}>
           <XAxis
             dataKey="label"
-            tick={{ fill: 'rgba(226,232,240,0.7)' }}
-            axisLine={{ stroke: 'rgba(148,163,184,0.25)' }}
-            tickLine={{ stroke: 'rgba(148,163,184,0.25)' }}
+            tick={{ fill: 'rgba(15,23,42,0.6)' }}
+            axisLine={{ stroke: 'rgba(15,23,42,0.14)' }}
+            tickLine={{ stroke: 'rgba(15,23,42,0.14)' }}
           />
           <YAxis
-            tickFormatter={(value) => (Number.isFinite(value) ? formatPace(value).replace(' /km', '') : '—')}
-            tick={{ fill: 'rgba(226,232,240,0.7)' }}
-            axisLine={{ stroke: 'rgba(148,163,184,0.25)' }}
-            tickLine={{ stroke: 'rgba(148,163,184,0.25)' }}
+            tickFormatter={(value) => (Number.isFinite(value) ? formatPace(value).replace(' /km', '') : 'Not available')}
+            tick={{ fill: 'rgba(15,23,42,0.6)' }}
+            axisLine={{ stroke: 'rgba(15,23,42,0.14)' }}
+            tickLine={{ stroke: 'rgba(15,23,42,0.14)' }}
           />
           <Tooltip
-            formatter={(value) => (Number.isFinite(value) ? formatPace(value) : '—')}
+            formatter={(value) => (Number.isFinite(value) ? formatPace(value) : 'Not available')}
             labelFormatter={(label) => `Week of ${label}`}
             contentStyle={{
-              background: 'rgba(15,23,42,0.9)',
-              border: '1px solid rgba(148,163,184,0.25)',
-              borderRadius: 14,
-              color: 'rgba(234,242,255,0.95)',
+              background: 'rgba(255,255,255,0.98)',
+              border: '1px solid rgba(15,23,42,0.12)',
+              borderRadius: 0,
+              color: 'rgba(15,23,42,0.92)',
             }}
           />
-          <Line type="monotone" dataKey="avgPaceMinPerKm" stroke="#38bdf8" strokeWidth={3} dot={false} />
+          <Line type="monotone" dataKey="avgPaceMinPerKm" stroke="#0f766e" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>

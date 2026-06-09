@@ -3,20 +3,26 @@ const Login = () => (
     <section className="hero">
       <div>
         <p className="eyebrow">StrideCircle</p>
-        <h1>Compete with your running group and get AI coaching after every run.</h1>
+        <h1>Connect your running history and read it with more clarity.</h1>
         <p className="lead">
-          Connect Strava, sync runs, earn points, and share leaderboards with your crew.
+          Sync Strava, compare runs, and see a calmer view of progress, pace, and consistency.
         </p>
-        <a className="button" href="/api/strava">
-          Connect with Strava
-        </a>
+        <div className="actions">
+          <a className="button" href="/api/strava">
+            Connect with Strava
+          </a>
+          <a className="button secondary" href="/dashboard">
+            View dashboard
+          </a>
+        </div>
       </div>
+
       <div className="hero-card">
-        <h3>Week at a glance</h3>
+        <p className="eyebrow">Quick preview</p>
         <ul>
-          <li>42.3 km total distance</li>
-          <li>5:12 /km average pace</li>
-          <li>+3 streak days</li>
+          <li>Weekly distance and pace</li>
+          <li>Activity compare and AI score</li>
+          <li>Profile totals and history</li>
         </ul>
       </div>
     </section>

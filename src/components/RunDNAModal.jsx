@@ -33,11 +33,11 @@ const RunDNAModal = ({ activityId, onClose }) => {
           <div>
             <h3 style={{ margin: 0 }}>RunDNA</h3>
             <p className="muted" style={{ margin: '6px 0 0' }}>
-              Pace stability + heart-rate drift (from Strava streams).
+              Pace stability and heart rate drift from Strava streams.
             </p>
           </div>
           <button type="button" className="icon-button" onClick={onClose} aria-label="Close modal">
-            ✕
+            Close
           </button>
         </div>
 
@@ -64,8 +64,8 @@ const RunDNAModal = ({ activityId, onClose }) => {
                   <div className="run-title">
                     <div className="run-name">{activity?.name || 'Run'}</div>
                     <div className="muted">
-                      {formatDate(activity?.start_date)} · {metersToKm(activity?.distance_m)} km ·{' '}
-                      {secondsToHms(activity?.elapsed_time_sec || activity?.moving_time_sec) ?? '—'}
+                      {formatDate(activity?.start_date)}, {metersToKm(activity?.distance_m)} km,{' '}
+                      {secondsToHms(activity?.elapsed_time_sec || activity?.moving_time_sec) ?? 'Not available'}
                     </div>
                   </div>
                   <div className="run-type">
@@ -79,24 +79,28 @@ const RunDNAModal = ({ activityId, onClose }) => {
                 <div className="metrics-grid">
                   <Metric
                     label="Stability"
-                    value={insights.stabilityScore !== null ? `${insights.stabilityScore}/100` : '—'}
-                    helper="Lower pace volatility → higher score"
+                    value={insights.stabilityScore !== null ? `${insights.stabilityScore}/100` : 'Not available'}
+                    helper="Lower pace volatility means a higher score"
                   />
                   <Metric label="Avg pace" value={formatPace(insights.avgPaceMinPerKm)} helper="From streams" />
                   <Metric
                     label="Volatility"
-                    value={insights.paceVolatility !== null ? `${insights.paceVolatility.toFixed(2)} min/km` : '—'}
+                    value={insights.paceVolatility !== null ? `${insights.paceVolatility.toFixed(2)} min/km` : 'Not available'}
                     helper="Std dev of pace"
                   />
                   <Metric
                     label="Split"
-                    value={insights.splitDeltaMinPerKm !== null ? formatPaceDelta(insights.splitDeltaMinPerKm) : '—'}
-                    helper="2nd half − 1st half"
+                    value={insights.splitDeltaMinPerKm !== null ? formatPaceDelta(insights.splitDeltaMinPerKm) : 'Not available'}
+                    helper="Second half minus first half"
                   />
                   <Metric
                     label="HR drift"
-                    value={insights.hrDrift !== null ? `${insights.hrDrift >= 0 ? '+' : ''}${insights.hrDrift} bpm` : '—'}
-                    helper="2nd half − 1st half"
+                    value={
+                      insights.hrDrift !== null
+                        ? `${Math.abs(insights.hrDrift)} bpm ${insights.hrDrift >= 0 ? 'higher' : 'lower'}`
+                        : 'Not available'
+                    }
+                    helper="Second half minus first half"
                   />
                 </div>
 
@@ -117,4 +121,3 @@ const RunDNAModal = ({ activityId, onClose }) => {
 }
 
 export default RunDNAModal
-

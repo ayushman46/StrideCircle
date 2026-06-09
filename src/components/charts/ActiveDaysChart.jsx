@@ -9,8 +9,8 @@ import {
 import { formatPace } from '../../lib/utils'
 
 const ActiveDaysChart = ({ data, variant = 'card' }) => {
-  const tickColor = 'rgba(226,232,240,0.7)'
-  const axisColor = 'rgba(148,163,184,0.25)'
+  const tickColor = 'rgba(15,23,42,0.6)'
+  const axisColor = 'rgba(15,23,42,0.14)'
 
   const chart = (
     <div className="chart">
@@ -30,13 +30,13 @@ const ActiveDaysChart = ({ data, variant = 'card' }) => {
               return [value, key]
             }}
             contentStyle={{
-              background: 'rgba(15,23,42,0.9)',
-              border: '1px solid rgba(148,163,184,0.25)',
-              borderRadius: 14,
-              color: 'rgba(234,242,255,0.95)',
+              background: 'rgba(255,255,255,0.98)',
+              border: '1px solid rgba(15,23,42,0.12)',
+              borderRadius: 0,
+              color: 'rgba(15,23,42,0.92)',
             }}
           />
-          <Bar dataKey="distanceKm" fill="#a78bfa" radius={[10, 10, 0, 0]} />
+          <Bar dataKey="distanceKm" fill="#0f766e" radius={[0, 0, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -54,4 +54,3 @@ const ActiveDaysChart = ({ data, variant = 'card' }) => {
 }
 
 export default ActiveDaysChart
-

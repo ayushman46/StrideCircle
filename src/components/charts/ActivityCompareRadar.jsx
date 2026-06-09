@@ -44,8 +44,8 @@ const ActivityCompareRadar = ({ activities }) => {
     { metric: 'HR', one: hrN[0], two: hrN[1], three: hrN[2] },
   ]
 
-  const tickColor = 'rgba(226,232,240,0.72)'
-  const axisColor = 'rgba(148,163,184,0.25)'
+  const tickColor = 'rgba(15,23,42,0.6)'
+  const axisColor = 'rgba(15,23,42,0.14)'
 
   return (
     <div className="chart chart-tall">
@@ -54,9 +54,9 @@ const ActivityCompareRadar = ({ activities }) => {
           <PolarGrid stroke={axisColor} />
           <PolarAngleAxis dataKey="metric" tick={{ fill: tickColor, fontSize: 12 }} />
           <PolarRadiusAxis tick={false} axisLine={{ stroke: axisColor }} />
-          {activities[0] && <Radar name="Run 1" dataKey="one" stroke="#a78bfa" fill="#a78bfa" fillOpacity={0.25} />}
-          {activities[1] && <Radar name="Run 2" dataKey="two" stroke="#22c55e" fill="#22c55e" fillOpacity={0.18} />}
-          {activities[2] && <Radar name="Run 3" dataKey="three" stroke="#38bdf8" fill="#38bdf8" fillOpacity={0.18} />}
+          {activities[0] && <Radar name="Run 1" dataKey="one" stroke="#0f766e" fill="#0f766e" fillOpacity={0.18} />}
+          {activities[1] && <Radar name="Run 2" dataKey="two" stroke="#0b5f59" fill="#0b5f59" fillOpacity={0.12} />}
+          {activities[2] && <Radar name="Run 3" dataKey="three" stroke="#2563eb" fill="#2563eb" fillOpacity={0.12} />}
         </RadarChart>
       </ResponsiveContainer>
     </div>

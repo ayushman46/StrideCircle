@@ -22,23 +22,24 @@ export const paceFromSpeed = (averageSpeed) => {
 }
 
 export const formatPace = (pace) => {
-  if (!Number.isFinite(pace)) return '—'
+  if (!Number.isFinite(pace)) return 'Not available'
   const minutes = Math.floor(pace)
   const seconds = Math.round((pace - minutes) * 60)
   return `${minutes}:${String(seconds).padStart(2, '0')} /km`
 }
 
 export const formatPaceDelta = (deltaMinPerKm) => {
-  if (!Number.isFinite(deltaMinPerKm)) return '—'
-  const sign = deltaMinPerKm > 0 ? '+' : deltaMinPerKm < 0 ? '−' : ''
+  if (!Number.isFinite(deltaMinPerKm)) return 'Not available'
+  if (deltaMinPerKm === 0) return 'No change'
+  const direction = deltaMinPerKm > 0 ? 'Slower by' : 'Faster by'
   const abs = Math.abs(deltaMinPerKm)
   const minutes = Math.floor(abs)
   const seconds = Math.round((abs - minutes) * 60)
-  return `${sign}${minutes}:${String(seconds).padStart(2, '0')} /km`
+  return `${direction} ${minutes}:${String(seconds).padStart(2, '0')} /km`
 }
 
 export const formatDate = (value) => {
-  if (!value) return '—'
+  if (!value) return 'Not available'
   const date = new Date(value)
   return date.toLocaleDateString(undefined, {
     month: 'short',

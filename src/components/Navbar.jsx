@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
-const buildNavItems = () => [
+const navItems = [
   { to: '/', label: 'Home' },
   { to: '/dashboard', label: 'Dashboard' },
   { to: '/groups/preview', label: 'Group' },
@@ -10,7 +10,6 @@ const buildNavItems = () => [
 ]
 
 const Navbar = () => {
-  const navItems = useMemo(() => buildNavItems(), [])
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -18,7 +17,6 @@ const Navbar = () => {
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="navbar-inner">
         <Link className="brand" to="/">
-          <span className="brand-mark" aria-hidden="true">◎</span>
           <span>StrideCircle</span>
         </Link>
 
@@ -42,7 +40,7 @@ const Navbar = () => {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((value) => !value)}
         >
-          <span className="nav-toggle-icon" aria-hidden="true" />
+          {menuOpen ? 'Close' : 'Menu'}
         </button>
       </div>
 
@@ -56,7 +54,7 @@ const Navbar = () => {
               aria-label="Close menu"
               onClick={() => setMenuOpen(false)}
             >
-              ✕
+              Close
             </button>
           </div>
 

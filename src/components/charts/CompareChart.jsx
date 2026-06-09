@@ -13,11 +13,11 @@ const CompareChart = ({ data }) => (
     <div className="chart">
       <ResponsiveContainer width="100%" height={280}>
         <RadarChart data={data}>
-          <PolarGrid />
-          <PolarAngleAxis dataKey="metric" />
-          <PolarRadiusAxis />
-          <Radar name="You" dataKey="you" stroke="#4f46e5" fill="#4f46e5" fillOpacity={0.4} />
-          <Radar name="Teammate" dataKey="mate" stroke="#22c55e" fill="#22c55e" fillOpacity={0.3} />
+          <PolarGrid stroke="rgba(15,23,42,0.14)" />
+          <PolarAngleAxis dataKey="metric" tick={{ fill: 'rgba(15,23,42,0.6)', fontSize: 12 }} />
+          <PolarRadiusAxis tick={false} axisLine={{ stroke: 'rgba(15,23,42,0.14)' }} />
+          <Radar name="You" dataKey="you" stroke="#0f766e" fill="#0f766e" fillOpacity={0.18} />
+          <Radar name="Teammate" dataKey="mate" stroke="#2563eb" fill="#2563eb" fillOpacity={0.12} />
         </RadarChart>
       </ResponsiveContainer>
     </div>
